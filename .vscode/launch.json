@@ -1,0 +1,26 @@
+{
+  "version": "0.2.0",
+  "nodeVersionHint": 10,
+  "configurations": [
+    {
+      "name": "backend:server",
+      "type": "node",
+      "request": "launch",
+      "cwd": "${workspaceRoot}",
+      "internalConsoleOptions": "openOnSessionStart",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run-script", "debug", "-w", "backend"],
+      "skipFiles": []
+    },
+    {
+      "name": "backend:test",
+      "type": "node",
+      "request": "launch",
+      "cwd": "${workspaceRoot}",
+      "internalConsoleOptions": "openOnSessionStart",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run-script", "test", "-w", "backend"],
+      "skipFiles": []
+    }
+  ]
+}

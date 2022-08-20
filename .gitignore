@@ -1,0 +1,4 @@
+**/*.env
+!**/*.gitkeep
+**/tsconfig.tsbuldbuldinfo
+node_modules

@@ -1,0 +1,11 @@
+{
+  "name": "@types/fluid",
+  "scripts": {
+    "test": "echo \"hi from types package\""
+  },
+  "version": "1.0.0",
+  "types": "lib/index.t.ts",
+  "author": "shahar",
+  "license": "MIT",
+  "private": false
+}
