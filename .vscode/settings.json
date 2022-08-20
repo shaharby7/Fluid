@@ -1,5 +1,10 @@
 {
   "eslint.format.enable": true,
   "eslint.lintTask.options": "-c ${userHome}/bin/eslint --ignore-path ${workspaceFolder}/.eslintignore .",
-  "conventionalCommits.scopes": ["boilerplate"]
+  "conventionalCommits.scopes": [
+    "boilerplate"
+  ],
+  "cSpell.words": [
+    "reduxjs"
+  ]
 }

@@ -3,7 +3,7 @@
   "nodeVersionHint": 10,
   "configurations": [
     {
-      "name": "backend:server",
+      "name": "backend:debug",
       "type": "node",
       "request": "launch",
       "cwd": "${workspaceRoot}",
@@ -21,6 +21,13 @@
       "runtimeExecutable": "npm",
       "runtimeArgs": ["run-script", "test", "-w", "backend"],
       "skipFiles": []
+    },
+    {
+      "name": "frontend:debug",
+      "request": "launch",
+      "type": "chrome",
+      "url": "http://localhost:3000",
+      "webRoot": "${workspaceFolder}/projects/frontend"
     }
   ]
 }
