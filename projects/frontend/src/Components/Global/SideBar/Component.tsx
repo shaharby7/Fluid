@@ -1,7 +1,10 @@
 import * as React from "react";
+import * as _ from "lodash";
 
-import { useAppDispatch } from "../../../hooks";
-import { setTab } from "./Reducer";
+import sideBarItemsConfig from "./sideBarItemsConfig";
+
+import { useAppDispatch, useAppSelector } from "../../../hooks";
+import { pushToRoute, popFromRoute, cutRouteByIdx } from "./Reducer";
 
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
@@ -11,15 +14,19 @@ import List from "@mui/material/List";
 import Divider from "@mui/material/Divider";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
+import Typography from "@mui/material/Typography/Typography";
+import { ButtonBase, Grid, IconButton, ListItemIcon } from "@mui/material";
+import FolderIcon from "@mui/icons-material/Folder";
+import AddIcon from "@mui/icons-material/Add";
+import ArrowLeftIcon from "@mui/icons-material/ArrowLeft";
 
 const drawerWidth = 240;
 
 export default function SideBar() {
   const dispatch = useAppDispatch();
+  const route = useAppSelector((state) => state.SideBar.route);
+  const availableItems = _.get(sideBarItemsConfig, route.join("."));
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
@@ -37,17 +44,35 @@ export default function SideBar() {
       >
         <Toolbar />
         <Divider />
-        <List>
-          {["Workspace", "Debug", "Deploy"].map((text, index) => (
-            <ListItem key={text} disablePadding>
-              <ListItemButton onClick={() => dispatch(setTab(text))}>
-                <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItemButton>
-            </ListItem>
+        <Grid container justifyContent="flex">
+          <IconButton onClick={() => dispatch(popFromRoute())}>
+            <ArrowLeftIcon />
+          </IconButton>
+        </Grid>
+        <Grid container justifyContent="flex">
+          {route.map((page, index) => (
+            <ButtonBase onClick={() => dispatch(cutRouteByIdx(index))}>
+              <Typography paragraph>{`/${page}`}</Typography>
+            </ButtonBase>
           ))}
+        </Grid>
+        <List>
+          {_.entries(availableItems).map(([name, attrs]) => {
+            const isFolder = !attrs.kind; //make less stupid validation
+            const handleClick = () => {
+              if (isFolder) dispatch(pushToRoute(name));
+            };
+            return (
+              <ListItem key={name} disablePadding>
+                <ListItemIcon>
+                  {isFolder ? <FolderIcon /> : <AddIcon />}
+                </ListItemIcon>
+                <ListItemButton onClick={handleClick}>
+                  <ListItemText primary={name} />
+                </ListItemButton>
+              </ListItem>
+            );
+          })}
         </List>
       </Drawer>
     </Box>
