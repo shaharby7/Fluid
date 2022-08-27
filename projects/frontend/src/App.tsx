@@ -1,18 +1,28 @@
 import React from "react";
 import "./App.css";
+import { Box } from "@mui/system";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 
-import SideBar from "./Components/Global/SideBar/Component";
+import SideBar from "./Components/SideBar/Component";
+import Workspace from "./Components/Workspace/Component";
 
-import BasicComponent from "./Components/Common/BasicComponent/Component";
+const sx = {
+  width: "100vw",
+  height: "100vh",
+  display: "flex",
+  flexDirection: "row",
+  backgroundColor: "#282c34",
+};
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
+    <Box sx={sx} id="hi">
+      <DndProvider backend={HTML5Backend}>
         <SideBar />
-        <BasicComponent />
-      </header>
-    </div>
+        <Workspace />
+      </DndProvider>
+    </Box>
   );
 }
 

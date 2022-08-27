@@ -1,16 +1,15 @@
 import React from "react";
-import BasicComponent from "../../Common/BasicComponent/Component";
+import BasicBlock from "../Blocks/BasicBlock/Component";
+import { BlockProps } from "../Blocks/BasicBlock/Component";
 
 export enum SiteBarItemKinds {
   "Dragable" = "Dragable",
   "InlineItem" = "InlineItem",
 }
 
-type ReactRender = (props?: unknown) => React.Component | JSX.Element;
-
 export type SideBarItem = {
   kind: SiteBarItemKinds;
-  component?: React.Component | ReactRender;
+  component?: React.FC<BlockProps>;
 };
 
 export type SideBarItemsConfig = {
@@ -19,21 +18,17 @@ export type SideBarItemsConfig = {
 
 const sideBarItemsConfig: SideBarItemsConfig = {
   Home: {
-    Workspace: {},
+    Blocks: {},
     Debug: {},
     Deployments: {},
     JustTrying: {
-      Workspace: {
-        kind: SiteBarItemKinds.Dragable,
-        component: BasicComponent,
-      },
       Debug: {
         kind: SiteBarItemKinds.Dragable,
-        component: BasicComponent,
+        component: BasicBlock,
       },
       Deployments: {
         kind: SiteBarItemKinds.Dragable,
-        component: BasicComponent,
+        component: BasicBlock,
       },
     },
   },

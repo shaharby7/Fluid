@@ -2,7 +2,8 @@
   "eslint.format.enable": true,
   "eslint.lintTask.options": "-c ${userHome}/bin/eslint --ignore-path ${workspaceFolder}/.eslintignore .",
   "conventionalCommits.scopes": [
-    "boilerplate"
+    "boilerplate",
+    "frontend"
   ],
   "cSpell.words": [
     "reduxjs"
