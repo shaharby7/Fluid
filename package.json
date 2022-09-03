@@ -9,6 +9,7 @@
   "description": "A visual programing languages",
   "scripts": {
     "test": "npm run test -ws",
+    "debug": "npm run debug -ws",
     "lint": "eslint ./projects --fix --ext .ts --ignore-path .gitignore .",
     "prepare": "husky install"
   },

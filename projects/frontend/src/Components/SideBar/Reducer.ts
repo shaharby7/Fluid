@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import type { RootState } from "../../Redux/store";
+import type { RootState } from "../../FrameWorks/Redux/store";
 
 export interface SideBarState {
   route: string[];

@@ -1,4 +1,4 @@
 import React from "react";
-import BasicBlock from "./Components/Blocks/BasicBlock/Component";
+import BasicBlock from "./Components/Block/Component";
 
-export default <BasicBlock title="shahar" />;
+export default <BasicBlock id="shahar" />;

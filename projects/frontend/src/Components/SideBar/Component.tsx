@@ -3,8 +3,9 @@ import _ from "lodash";
 
 import sideBarItemsConfig from "./sideBarItemsConfig";
 
-import { useAppDispatch, useAppSelector } from "../../Redux/hooks";
+import { useAppDispatch, useAppSelector } from "../../FrameWorks/Redux/hooks";
 import { pushToRoute, popFromRoute, cutRouteByIdx } from "./Reducer";
+import { addBlock } from "../Workspace/Reducer";
 
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
@@ -51,7 +52,10 @@ export default function SideBar() {
         </Grid>
         <Grid container justifyContent="flex">
           {route.map((page, index) => (
-            <ButtonBase key ={page + index.toString()} onClick={() => dispatch(cutRouteByIdx(index))}>
+            <ButtonBase
+              key={page + index.toString()}
+              onClick={() => dispatch(cutRouteByIdx(index))}
+            >
               <Typography paragraph>{`/${page}`}</Typography>
             </ButtonBase>
           ))}
@@ -60,7 +64,13 @@ export default function SideBar() {
           {_.entries(availableItems).map(([name, attrs], index) => {
             const isFolder = !attrs.kind; //make less stupid validation
             const handleClick = () => {
-              if (isFolder) dispatch(pushToRoute(name));
+              if (isFolder) {
+                dispatch(pushToRoute(name));
+              } else {
+                dispatch(
+                  addBlock({ type: attrs.value as string, x: 50, y: 50 })
+                );
+              }
             };
             return (
               <ListItem key={name + index.toString()} disablePadding>

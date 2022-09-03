@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { SideBarReducer } from "../Components/SideBar/Reducer";
+import { SideBarReducer } from "../../Components/SideBar/Reducer";
+import { WorkspaceReducer } from "../../Components/Workspace/Reducer";
 
 export const store = configureStore({
   reducer: {
     SideBar: SideBarReducer,
+    Workspace: WorkspaceReducer,
   },
 });
 

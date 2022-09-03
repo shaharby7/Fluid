@@ -2,8 +2,8 @@ import type { CSSProperties, FC } from "react";
 import type { XYCoord } from "react-dnd";
 import { useDragLayer } from "react-dnd";
 
-import BasicBlock from "../Blocks/BasicBlock/Component";
-import { ItemTypes } from "../../DND/itemTypes";
+import BasicBlock from "../Block/Component";
+import { ItemTypes } from "../../FrameWorks/DND/itemTypes";
 
 const layerStyles: CSSProperties = {
   position: "fixed",
@@ -47,7 +47,7 @@ const WorkspaceDragableLayer: FC<unknown> = (props) => {
   function renderItem() {
     switch (itemType) {
       case ItemTypes.BLOCK:
-        return <BasicBlock title={item.title} />;
+        return <BasicBlock id={item.id} />;
       default:
         return null;
     }

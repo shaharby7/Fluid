@@ -1,7 +1,3 @@
-import React from "react";
-import BasicBlock from "../Blocks/BasicBlock/Component";
-import { BlockProps } from "../Blocks/BasicBlock/Component";
-
 export enum SiteBarItemKinds {
   "Dragable" = "Dragable",
   "InlineItem" = "InlineItem",
@@ -9,7 +5,7 @@ export enum SiteBarItemKinds {
 
 export type SideBarItem = {
   kind: SiteBarItemKinds;
-  component?: React.FC<BlockProps>;
+  value: string;
 };
 
 export type SideBarItemsConfig = {
@@ -24,12 +20,16 @@ const sideBarItemsConfig: SideBarItemsConfig = {
     JustTrying: {
       Debug: {
         kind: SiteBarItemKinds.Dragable,
-        component: BasicBlock,
+        value: "BasicBlock",
       },
       Deployments: {
         kind: SiteBarItemKinds.Dragable,
-        component: BasicBlock,
+        value: "BasicBlock",
       },
+    },
+    "Basic block": {
+      kind: SiteBarItemKinds.Dragable,
+      value: "BasicBlock",
     },
   },
 };

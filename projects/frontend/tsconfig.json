@@ -18,8 +18,8 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "paths": {
-      "@redux/*": ["redux/*"]
-    },
+      "@redux/*": ["./src/FrameWorks/Redux/*"]
+    }
   },
   "include": ["src"]
 }

@@ -4,8 +4,8 @@ import type { DragSourceMonitor } from "react-dnd";
 import { useDrag } from "react-dnd";
 import { getEmptyImage } from "react-dnd-html5-backend";
 
-import BasicBlock from "../Blocks/BasicBlock/Component";
-import { ItemTypes } from "../../DND/itemTypes";
+import BasicBlock from "../Block/Component";
+import { ItemTypes } from "../../FrameWorks/DND/itemTypes";
 
 function getStyles(
   left: number,
@@ -26,22 +26,21 @@ function getStyles(
 
 export interface DraggableBoxProps {
   id: string;
-  title: string;
   left: number;
   top: number;
 }
 
 export const DraggableBox: FC<DraggableBoxProps> = (props) => {
-  const { id, title, left, top } = props;
+  const { id, left, top } = props;
   const [{ isDragging }, drag, preview] = useDrag(
     () => ({
       type: ItemTypes.BLOCK,
-      item: { id, left, top, title },
+      item: { id, left, top },
       collect: (monitor: DragSourceMonitor) => ({
         isDragging: monitor.isDragging(),
       }),
     }),
-    [id, left, top, title]
+    [id, left, top]
   );
 
   useEffect(() => {
@@ -49,12 +48,8 @@ export const DraggableBox: FC<DraggableBoxProps> = (props) => {
   }, []);
 
   return (
-    <div
-      ref={drag}
-      style={getStyles(left, top, isDragging)}
-      role="DraggableBox"
-    >
-      <BasicBlock title={title} />
+    <div ref={drag} style={getStyles(left, top, isDragging)}>
+      <BasicBlock id={id} />
     </div>
   );
 };

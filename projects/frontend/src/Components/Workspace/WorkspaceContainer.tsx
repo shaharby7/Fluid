@@ -3,42 +3,33 @@ import type { CSSProperties, FC } from "react";
 import { useCallback, useState } from "react";
 import { useDrop } from "react-dnd";
 
-// import BasicBlock from "../Blocks/BasicBlock/Component";
 import type { DragItem } from "./interfaces";
-import { ItemTypes } from "../../DND/itemTypes";
+import { ItemTypes } from "../../FrameWorks/DND/itemTypes";
 import { DraggableBox } from "./DragableBox";
+import { useAppDispatch, useAppSelector } from "../../FrameWorks/Redux/hooks";
+
+import { modifyBlock } from "./Reducer";
+import { IBlockData } from "@fluid/data-structures";
 
 const styles: CSSProperties = {
   width: "100%",
   height: "100%",
   position: "relative",
 };
+const WorkspaceContainer: FC = () => {
+  const blocks: IBlockData[] = useAppSelector(
+    (state) => state.Workspace.blocks
+  );
+  
+  const dispatch = useAppDispatch();
 
-export interface ContainerProps {
-  snapToGrid?: boolean;
-}
-
-interface BoxMap {
-  [key: string]: { top: number; left: number; title: string };
-}
-
-const WorkspaceContainer: FC<ContainerProps> = ({ snapToGrid = false }) => {
-  const [boxes, setBoxes] = useState<BoxMap>({
-    a: { top: 20, left: 80, title: "Drag me around" },
-    b: { top: 180, left: 20, title: "Drag me too" },
-  });
-
-  const moveBox = useCallback(
+  const moveBlock = useCallback(
     (id: string, left: number, top: number) => {
-      setBoxes(
-        update(boxes, {
-          [id]: {
-            $merge: { left, top },
-          },
-        })
+      dispatch(
+        modifyBlock({ id, attrs: { uiProperties: { x: left, y: top } } })
       );
     },
-    [boxes]
+    [dispatch]
   );
 
   const [, drop] = useDrop(
@@ -53,20 +44,22 @@ const WorkspaceContainer: FC<ContainerProps> = ({ snapToGrid = false }) => {
         const left = Math.round(item.left + delta.x);
         const top = Math.round(item.top + delta.y);
 
-        moveBox(item.id, left, top);
+        moveBlock(item.id, left, top);
         return undefined;
       },
     }),
-    [moveBox]
+    [moveBlock]
   );
 
   return (
     <div ref={drop} style={styles}>
-      {Object.keys(boxes).map((key) => (
+      {blocks.map((block: IBlockData) => (
         <DraggableBox
-          key={key}
-          id={key}
-          {...(boxes[key] as { top: number; left: number; title: string })}
+          key={block.id}
+          id={block.id}
+          // {...(block as { top: number; left: number; id: string })}
+          top={block.uiProperties.y}
+          left={block.uiProperties.x}
         />
       ))}
     </div>

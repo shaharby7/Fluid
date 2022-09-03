@@ -4,7 +4,7 @@ import { Typography } from "@mui/material";
 import { FC } from "react";
 
 export interface BlockProps {
-  title: string;
+  id: string;
 }
 
 const BasicBlock: FC<BlockProps> = (props: BlockProps) => {
@@ -16,14 +16,14 @@ const BasicBlock: FC<BlockProps> = (props: BlockProps) => {
         backgroundColor: "primary.dark",
         display: "flex",
         flexDirection: "column",
-        textAlign:"center",
+        textAlign: "center",
         "&:hover": {
           backgroundColor: "primary.main",
           opacity: [0.9, 0.8, 0.7],
         },
       }}
     >
-      <Typography>{props.title}</Typography>
+      <Typography>{props.id}</Typography>
     </Box>
   );
 };

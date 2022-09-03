@@ -1,4 +1,5 @@
 **/*.env
 !**/*.gitkeep
-**/tsconfig.tsbuldbuldinfo
+**/*/tsconfig.tsbuildinfo
 node_modules
+**/dist
