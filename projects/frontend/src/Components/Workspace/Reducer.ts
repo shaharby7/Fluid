@@ -5,7 +5,6 @@ import _ from "lodash";
 import { IBlockData } from "@fluid/data-structures";
 
 import type { RootState } from "../../FrameWorks/Redux/store";
-import { BlockSharp } from "@mui/icons-material";
 
 export interface WorkspaceState {
   blocks: IBlockData[];
@@ -27,7 +26,7 @@ export const WorkspaceSilce = createSlice({
     ) => {
       state.autoIncrimentId++;
       const newBlock: IBlockData = {
-        id: `${action.type}-${state.autoIncrimentId}`,
+        id: `${action.payload.type}-${state.autoIncrimentId}`,
         name: "New block",
         type: action.payload.type,
         paremeters: {},

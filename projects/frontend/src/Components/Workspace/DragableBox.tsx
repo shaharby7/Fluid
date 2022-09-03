@@ -45,7 +45,7 @@ export const DraggableBox: FC<DraggableBoxProps> = (props) => {
 
   useEffect(() => {
     preview(getEmptyImage(), { captureDraggingState: true });
-  }, []);
+  });
 
   return (
     <div ref={drag} style={getStyles(left, top, isDragging)}>

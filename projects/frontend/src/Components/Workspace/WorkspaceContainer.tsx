@@ -1,6 +1,4 @@
-import update from "immutability-helper";
 import type { CSSProperties, FC } from "react";
-import { useCallback, useState } from "react";
 import { useDrop } from "react-dnd";
 
 import type { DragItem } from "./interfaces";
@@ -20,17 +18,15 @@ const WorkspaceContainer: FC = () => {
   const blocks: IBlockData[] = useAppSelector(
     (state) => state.Workspace.blocks
   );
-  
+
   const dispatch = useAppDispatch();
 
-  const moveBlock = useCallback(
+  const moveBlock =
     (id: string, left: number, top: number) => {
       dispatch(
         modifyBlock({ id, attrs: { uiProperties: { x: left, y: top } } })
       );
-    },
-    [dispatch]
-  );
+    };
 
   const [, drop] = useDrop(
     () => ({
@@ -57,7 +53,6 @@ const WorkspaceContainer: FC = () => {
         <DraggableBox
           key={block.id}
           id={block.id}
-          // {...(block as { top: number; left: number; id: string })}
           top={block.uiProperties.y}
           left={block.uiProperties.x}
         />
